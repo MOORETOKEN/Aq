@@ -1910,7 +1910,7 @@ Reply to this message with ${coinsymbol} amount\\.`, {
                     } else {
                         const message = await ctx.reply('📶 Loading token info...').catch()
                         await ctx.pinChatMessage(message.message_id)
-                        const { address, pair, name, symbol, balances, price, coinprice, tokendecimals, coindecimals, coinsymbol, explorer, chart, totalSupply, pairwith } = await getSolanaTokenInfo(text, userinfo.solanaprivatekeys)
+                        const { address, pair, name, symbol, balances, price, coinprice, tokendecimals, coindecimals, coinsymbol, explorer, chart, totalSupply, pairwith } = await getSolanaTokenInfo(text, userinfo.solanaprivatekeys) ?? {};
                         editSolanaTokenBuyMenu(message.chat.id, message.message_id, address, pair, name, symbol, balances, price, coinprice, tokendecimals, coindecimals, coinsymbol, explorer, chart, totalSupply, pairwith, undefined)
                         verifyUserMonitors(message.chat.id)
                         await openMonitorsSchema.create({ tokenaddress: address, chain: 'sol', chatid: message.chat.id, messageid: message.message_id, openedat: Date.now(), userid: ctx.message.from.id })
